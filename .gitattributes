@@ -1,0 +1,2 @@
+*.pkl filter=lfs diff=lfs merge=lfs -text
+PROYECTO/models/Prediccion_score_c_rf.pkl filter=lfs diff=lfs merge=lfs -text
