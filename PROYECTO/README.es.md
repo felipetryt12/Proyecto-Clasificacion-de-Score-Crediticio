@@ -1,88 +1,42 @@
-# Plantilla de Proyecto de Ciencia de Datos
+# Proyecto de Clasificación de Score Crediticio
 
-Esta plantilla está diseñada para impulsar proyectos de ciencia de datos proporcionando una configuración básica para conexiones de base de datos, procesamiento de datos, y desarrollo de modelos de aprendizaje automático. Incluye una organización estructurada de carpetas para tus conjuntos de datos y un conjunto de paquetes de Python predefinidos necesarios para la mayoría de las tareas de ciencia de datos.
+Este proyecto tiene como objetivo desarrollar un modelo de clasificación para predecir el puntaje de crédito de los clientes basado en sus características financieras y de comportamiento. 
 
-## Estructura
+## Estructura del Proyecto
 
-El proyecto está organizado de la siguiente manera:
+El proyecto está organizado en varios directorios y archivos que se detallan a continuación:
 
-- `app.py` - El script principal de Python que ejecutas para tu proyecto.
-- `explore.py` - Un notebook para que puedas hacer tus exploraciones, idealmente el codigo de este notebook se migra hacia app.py para subir a produccion.
-- `utils.py` - Este archivo contiene código de utilidad para operaciones como conexiones de base de datos.
-- `requirements.txt` - Este archivo contiene la lista de paquetes de Python necesarios.
-- `models/` - Este directorio debería contener tus clases de modelos SQLAlchemy.
-- `data/` - Este directorio contiene los siguientes subdirectorios:
-  - `interim/` - Para datos intermedios que han sido transformados.
-  - `processed/` - Para los datos finales a utilizar para el modelado.
-  - `raw/` - Para datos brutos sin ningún procesamiento.
+### Estructura del Directorio, Descripción de Carpetas y Archivos
 
-## Configuración
+- **`__pycache__/`**: Contiene archivos de caché generados automáticamente por Python para acelerar la ejecución.
+- **`.conda/`**: Puede contener configuraciones específicas relacionadas con entornos Conda.
+- **`.vscode/settings.json`**: Configuración personalizada para Visual Studio Code que afecta el entorno de desarrollo.
+- **`PROYECTO/data/`**: Carpeta que almacena tanto los datos crudos (`raw`) como los datos procesados (`processed`).
+- **`PROYECTO/models/`**: Almacena los modelos entrenados y scripts de ejemplo para su utilización.
+  - **`Prediccion_score_c_rf.pkl`**: Modelo de Random Forest entrenado y guardado.
+  - **`Ejemplo.py`**: Script de ejemplo para cargar y utilizar el modelo guardado.
+- **`PROYECTO/src/`**: Contiene todo el código fuente y los scripts necesarios para el manejo de datos, entrenamiento de modelos, y análisis.
+  - **`data/`**: Scripts relacionados con la creación, carga y manejo de bases de datos.
+  - **`Exploracion_datos/`**: Notebooks para exploración, análisis de datos y generación de características.
+  - **`models_training/`**: Notebooks dedicados al entrenamiento, optimización y evaluación de modelos de clasificación.
+  - **`utils.py`**: Contiene funciones utilitarias que son usadas a lo largo del proyecto.
+  - **`.env`**: Archivo donde se guardan las variables de entorno, por ejemplo, claves de API o configuraciones sensibles (excluido en `.gitignore`).
+  - **`.gitignore`**: Lista de archivos y carpetas que no deben ser subidos al repositorio Git.
+  - **`README.es.md`**: Versión en español del archivo README.
+  - **`README.md`**: Archivo README principal.
 
-**Prerrequisitos**
+## Instrucciones de Uso
 
-Asegúrate de tener Python 3.11+ instalado en tu máquina. También necesitarás pip para instalar los paquetes de Python.
+1. **Clonar el repositorio**: `git clone <URL-del-repositorio>`
+2. **Configurar el entorno**: Se recomienda crear un entorno virtual e instalar las dependencias utilizando el archivo `requirements.txt`.
+3. **Exploración y Preprocesamiento**:
+   - Utilizar los notebooks en `Exploracion_datos/` para entender y preprocesar los datos.
+4. **Entrenamiento de Modelos**:
+   - Los notebooks en `models_training/` contienen el proceso de selección y optimización de modelos.
+5. **Despliegue**:
+   - El modelo final entrenado se encuentra en `PROYECTO/models/Prediccion_score_c_rf.pkl` y puede ser cargado y utilizado como se muestra en `Ejemplo.py`.
 
-**Instalación**
+## Contacto
 
-Clona el repositorio del proyecto en tu máquina local.
+Para más información o preguntas sobre este proyecto, puedes contactarme a través de felipe.espinoza1299@gmail.com
 
-Navega hasta el directorio del proyecto e instala los paquetes de Python requeridos:
-
-```bash
-pip install -r requirements.txt
-```
-
-**Crear una base de datos (si es necesario)**
-
-Crea una nueva base de datos dentro del motor Postgres personalizando y ejecutando el siguiente comando: `$ createdb -h localhost -U <username> <db_name>`
-Conéctate al motor Postgres para usar tu base de datos, manipular tablas y datos: `$ psql -h localhost -U <username> <db_name>`
-NOTA: Recuerda revisar la información del archivo ./.env para obtener el nombre de usuario y db_name.
-
-¡Una vez que estés dentro de PSQL podrás crear tablas, hacer consultas, insertar, actualizar o eliminar datos y mucho más!
-
-**Variables de entorno**
-
-Crea un archivo .env en el directorio raíz del proyecto para almacenar tus variables de entorno, como tu cadena de conexión a la base de datos:
-
-```makefile
-DATABASE_URL="your_database_connection_url_here"
-```
-
-## Ejecutando la Aplicación
-
-Para ejecutar la aplicación, ejecuta el script app.py desde la raíz del directorio del proyecto:
-
-```bash
-python app.py
-```
-
-## Añadiendo Modelos
-
-Para añadir clases de modelos SQLAlchemy, crea nuevos archivos de script de Python dentro del directorio models/. Estas clases deben ser definidas de acuerdo a tu esquema de base de datos.
-
-Definición del modelo de ejemplo (`models/example_model.py`):
-
-```py
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String
-
-Base = declarative_base()
-
-class ExampleModel(Base):
-    __tablename__ = 'example_table'
-    id = Column(Integer, primary_key=True)
-    name = Column(String)
-
-```
-
-## Trabajando con Datos
-
-Puedes colocar tus conjuntos de datos brutos en el directorio data/raw, conjuntos de datos intermedios en data/interim, y los conjuntos de datos procesados listos para el análisis en data/processed.
-
-Para procesar datos, puedes modificar el script app.py para incluir tus pasos de procesamiento de datos, utilizando pandas para la manipulación y análisis de datos.
-
-## Contribuyentes
-
-Esta plantilla fue construida como parte del [Data Science and Machine Learning Bootcamp](https://4geeksacademy.com/us/coding-bootcamps/datascience-machine-learning) de 4Geeks Academy por [Alejandro Sanchez](https://twitter.com/alesanchezr) y muchos otros contribuyentes. Descubre más sobre [los programas BootCamp de 4Geeks Academy](https://4geeksacademy.com/us/programs) aquí.
-
-Otras plantillas y recursos como este se pueden encontrar en la página de GitHub de la escuela.

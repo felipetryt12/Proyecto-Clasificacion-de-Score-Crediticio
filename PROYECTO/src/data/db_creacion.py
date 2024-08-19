@@ -2,13 +2,11 @@ import os
 import sqlite3
 import pandas as pd
 
-# Obtener la ruta del directorio donde está ubicado el script
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
-# Define las rutas relativas basadas en el directorio del script
-database_path = os.path.join(script_dir, 'database_credito.db')  # La base de datos está en 'src\data'
-train_csv_path = os.path.join(script_dir, '..', '..', 'data', 'raw', 'train.csv')  # Desde 'src\data' a 'data\raw'
-test_csv_path = os.path.join(script_dir, '..', '..', 'data', 'raw', 'test.csv')   # Desde 'src\data' a 'data\raw'
+database_path = os.path.join(script_dir, 'database_credito.db') 
+train_csv_path = os.path.join(script_dir, '..', '..', 'data', 'raw', 'train.csv')  
+test_csv_path = os.path.join(script_dir, '..', '..', 'data', 'raw', 'test.csv') 
 
 
 print(f"Ruta absoluta de la base de datos: {database_path}")
