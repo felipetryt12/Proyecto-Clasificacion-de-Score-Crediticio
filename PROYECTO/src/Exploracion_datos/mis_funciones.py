@@ -68,3 +68,41 @@ def mostrar_frecuencia_categoricas(df):
 
 
 
+# Esta funcion muestra 3 heatmaps para ver el tipo de correlacion de las variables, tomando en cuenta pearson
+#spearman y kendall, para identificar magnitud y tipo de correlacion de nuestras caracteristicas con la variable 
+#objetivo, se utiliza para identificar el mejor metodo de reduccion de dimensionalidad
+
+
+def heatmaps_tipo_correlacion(data, variable_objetivo):
+    corr_pearson = data.corr(method='pearson')
+    corr_spearman = data.corr(method='spearman')
+    corr_kendall = data.corr(method='kendall')
+    
+    cols = [variable_objetivo] + [col for col in data.columns if col != variable_objetivo]
+    corr_pearson = corr_pearson.loc[cols, cols]
+    corr_spearman = corr_spearman.loc[cols, cols]
+    corr_kendall = corr_kendall.loc[cols, cols]
+    
+    num_columns = len(data.columns)
+    fig, axs = plt.subplots(3, 1, figsize=(num_columns * 1.2, 10 + num_columns // 2))
+    
+    sns.heatmap(corr_pearson, annot=True, cmap='coolwarm', center=0, ax=axs[0],
+                cbar_kws={"shrink": 0.8}, linewidths=.5)
+    axs[0].set_title('Correlación de Pearson')
+    axs[0].get_xticklabels()[0].set_color('red')
+    axs[0].get_yticklabels()[0].set_color('red')
+    
+    sns.heatmap(corr_spearman, annot=True, cmap='coolwarm', center=0, ax=axs[1],
+                cbar_kws={"shrink": 0.8}, linewidths=.5)
+    axs[1].set_title('Correlación de Spearman')
+    axs[1].get_xticklabels()[0].set_color('red')
+    axs[1].get_yticklabels()[0].set_color('red')
+    
+    sns.heatmap(corr_kendall, annot=True, cmap='coolwarm', center=0, ax=axs[2],
+                cbar_kws={"shrink": 0.8}, linewidths=.5)
+    axs[2].set_title('Correlación de Kendall')
+    axs[2].get_xticklabels()[0].set_color('red')
+    axs[2].get_yticklabels()[0].set_color('red')
+    
+    plt.tight_layout()
+    plt.show()
