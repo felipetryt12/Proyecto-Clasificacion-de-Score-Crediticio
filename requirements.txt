@@ -10,8 +10,6 @@ scikit-learn
 imblearn
 sqlite3
 xgboost
-streamlit
-joblib
 ipyleaflet>=0.14.0
 ipywidgets>=7.7.1
 opencv-python>=4.1.2
@@ -21,3 +19,7 @@ python-dotenv>=0.20.0
 requests>=2.27.1
 sqlalchemy>=1.4.37
 sympy>=1.10.1
+streamlit
+joblib
+scikit-learn
+pandas
